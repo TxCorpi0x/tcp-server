@@ -26,13 +26,13 @@ var num int = 0
 func (c *Client) Send() {
 	tcpAddr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("localhost:%s", c.Conf.Port))
 	if err != nil {
-		println("ResolveTCPAddr failed:", err.Error())
+		println("Error resolving tcp host:", err.Error())
 		os.Exit(1)
 	}
 
 	conn, err := net.DialTCP("tcp", nil, tcpAddr)
 	if err != nil {
-		println("Dial failed:", err.Error())
+		println("TCP Dial failed:", err.Error())
 		os.Exit(1)
 	}
 
@@ -40,7 +40,7 @@ func (c *Client) Send() {
 	numToSend := num
 	_, err = conn.Write([]byte("Add"))
 	if err != nil {
-		fmt.Printf("Write to server failed for %d: %s\n", numToSend, err.Error())
+		fmt.Printf("Request failed %d: %s\n", numToSend, err.Error())
 		os.Exit(1)
 	}
 
