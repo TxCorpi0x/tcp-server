@@ -2,7 +2,6 @@ package srv
 
 import (
 	"fmt"
-	"math/rand"
 	"net"
 	"os"
 	"strconv"
@@ -97,8 +96,11 @@ func (s *tcpServer) handle() {
 		s.concurrentHandlers <- 1
 		go func() {
 			s.handleConnection(conn)
-			sec := time.Duration(rand.Intn(5-2) + 2)
-			time.Sleep(sec * time.Second)
+
+			// // TODO: uncomment to simulate time consuming process
+			// sec := time.Duration(rand.Intn(5-2) + 2)
+			// time.Sleep(sec * time.Second)
+
 			// release concurrent handlers semaphore capacity
 			<-s.concurrentHandlers
 		}()

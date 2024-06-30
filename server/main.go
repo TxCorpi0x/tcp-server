@@ -11,8 +11,8 @@ import (
 func main() {
 	s := srv.NewTcpServer(srv.Conf{
 		Port:                  "8080",
-		ConcurrentConnections: 50,
-		ConcurrentHandlers:    3,
+		ConcurrentConnections: 100,
+		ConcurrentHandlers:    200,
 	})
 	s.Start()
 	sigChan := make(chan os.Signal, 1)
